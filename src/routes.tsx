@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PrivateRoutes from './private.routes';
+
 
 import Home from "./views/Home"
 import Contact from "./views/Contact"
@@ -15,7 +17,7 @@ const Routes: React.FC = () => {
             <Route path="/contact" component={Contact}/>
             <Route path="/signin" component={SignIn}/>
             <Route path="/signup" component={SignUp}/>
-            <Route path="/dashboard" component={Dashboard}/>
+            <PrivateRoutes path="/dashboard" exact component={Dashboard}/>
         </Switch>
       </BrowserRouter>
   );

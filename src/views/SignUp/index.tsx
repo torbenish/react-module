@@ -1,6 +1,7 @@
 import React, { useState, useCallback, FormEvent } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 import { Container } from "./style";
 import { api } from "../../services/api";
 
@@ -23,7 +24,7 @@ const SignUp: React.FC = () => {
         .post('users', data)
         .then( response => {
           setLoad(false);
-          toast.success("Cadastro realizado com sucesso!", {
+          toast.success("Cadastro realizado com sucesso! Você está sendo redirecionado para a página de login", {
             hideProgressBar: false,
             onClose: () => history.push('/signin'),
           });
@@ -37,12 +38,9 @@ const SignUp: React.FC = () => {
   );
 
   if (load) {
-    return (
-      <div>
-        <h1>Aguarde carregando!</h1>
-      </div>
-    );
+    return <Loader/>
   }
+
   return (
     <Container>
       <div className="card">

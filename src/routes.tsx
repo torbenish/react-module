@@ -5,6 +5,7 @@ import Home from "./views/Home"
 import Contact from "./views/Contact"
 import SignIn from "./views/SignIn"
 import SignUp from "./views/SignUp"
+import Dashboard from "./views/Dash"
 
 const Routes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Routes: React.FC = () => {
             <Route path="/contact" component={Contact}/>
             <Route path="/signin" component={SignIn}/>
             <Route path="/signup" component={SignUp}/>
+            <Route path="/dashboard" component={Dashboard}/>
         </Switch>
       </BrowserRouter>
   );

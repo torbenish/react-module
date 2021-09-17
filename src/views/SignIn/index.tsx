@@ -11,7 +11,7 @@ interface IData {
 }
 const SignIn: React.FC = () => {
   const [data, setData] = useState<IData>({} as IData);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   const history = useHistory();
 
@@ -20,12 +20,14 @@ const SignIn: React.FC = () => {
       e.preventDefault();
       setLoad(true);
       api
-        .post('users', data)
+        .post('session', data)
         .then( response => {
+          const sessionToken = JSON.stringify(response.data.token)
+          localStorage.setItem('@gamaServiceToken', sessionToken)
           setLoad(false);
           toast.success("Cadastro realizado com sucesso!", {
             hideProgressBar: false,
-            onClose: () => history.push('/signin'),
+            onClose: () => history.push('dashboard'),
           });
         })
         .catch(e => {

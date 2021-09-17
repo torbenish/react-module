@@ -1,17 +1,13 @@
 import React, { useState, useCallback, FormEvent } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 import { api } from "../../services/api";
 
 interface IData {
-  registro: string;
   name: string;
   email: string;
-  telefone: string;
-  celular: string;
-  senha: string;
-  profissao: string;
+  password: string;
 }
 const SignUp: React.FC = () => {
   const [data, setData] = useState<IData>({} as IData);
@@ -21,19 +17,18 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setLoad(true);
+      e.preventDefault()
+      setLoad(true)
       api
-        .post("", data)
-        .then((response) => {
+        .post('users', data)
+        .then( response => {
           setLoad(false);
-          console.log(response.data);
           toast.success("Cadastro realizado com sucesso!", {
             hideProgressBar: false,
-            onClose: () => history.push("/signin"),
+            onClose: () => history.push('/signin'),
           });
         })
-        .catch((e) => {
+        .catch( e => {
           toast.error("Oops, algo deu errado");
           setLoad(false);
         });
@@ -55,41 +50,24 @@ const SignUp: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Informe seu registro"
-            onChange={(e) => setData({ ...data, registro: e.target.value })}
-          />
-          <input
-            type="text"
             placeholder="Informe seu nome"
-            onChange={(e) => setData({ ...data, name: e.target.value })}
+            onChange={e => setData({ ...data, name: e.target.value })}
           />
           <input
             type="text"
             placeholder="Informe seu email"
-            onChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Informe seu telefone"
-            onChange={(e) => setData({ ...data, telefone: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Informe seu celular"
-            onChange={(e) => setData({ ...data, celular: e.target.value })}
+            onChange={e => setData({ ...data, email: e.target.value })}
           />
           <input
             type="password"
             placeholder="Informe sua senha"
-            onChange={(e) => setData({ ...data, senha: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Informe sua profissao"
-            onChange={(e) => setData({ ...data, profissao: e.target.value })}
+            onChange={e => setData({ ...data, password: e.target.value })}
           />
           <input type="submit" value="Cadastrar" />
         </form>
+        <Link to="/signin"> 
+        Clique aqui para logar.
+        </Link>
       </div>
     </Container>
   );

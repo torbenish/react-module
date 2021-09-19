@@ -25,7 +25,7 @@ const SignIn: React.FC = () => {
           const sessionToken = JSON.stringify(response.data.token)
           localStorage.setItem('@gamaServiceToken', sessionToken)
           setLoad(false);
-          toast.success("Cadastro realizado com sucesso!", {
+          toast.success("Login realizado com sucesso!", {
             hideProgressBar: false,
             onClose: () => history.push('dashboard'),
           });

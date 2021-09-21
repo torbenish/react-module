@@ -1,10 +1,14 @@
 import React from 'react';
 import { NavBar } from './style';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import { useSelector} from "react-redux";
+import {IGlobalState} from '../../store/modules/user/types'
 
 import LogoGama from '../../assets/img/logo.png'
 
 const Nav: React.FC = () => {
+  const state = useSelector((state: IGlobalState) => state.users)
   return (
     <div>
       <NavBar>
@@ -14,6 +18,11 @@ const Nav: React.FC = () => {
           <Link to="/courses"> Cursos </Link>
           <Link to="/signup"> Cadastre-se </Link>
           <Link to="/signin"> Login </Link>
+          { state.length >= 1 && (
+          <Link to="/dashboard">
+            Dashboard
+            </Link>
+            )}
         </div>
       </NavBar>
     </div>
